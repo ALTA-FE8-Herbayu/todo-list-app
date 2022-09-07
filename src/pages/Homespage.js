@@ -8,6 +8,7 @@ import Detailtodo from "./Detailtodo";
 const Homes = () => {
     const navigate = useNavigate();
     const [list, setList] = useState([]);
+    const [content, setContent] = useState("");
 
     useEffect(() => {
         getData();
@@ -31,18 +32,41 @@ const Homes = () => {
         }
     };
 
-    const handleDetailPage = (item) => {
-        navigate(`edit/${item.id}`, {
-            state: {
-                id: item.id,
-                content: item.content,
-            },
+    const addData = async () => {
+        let axios = require("axios");
+        var data = JSON.stringify({
+            content: content,
+            due_string: "tomorrow at 12:00",
+            due_lang: "en",
+            priority: 4,
         });
+        let config = {
+            method: "post",
+            url: "https://api.todoist.com/rest/v1/tasks",
+            headers: {
+                Authorization: "Bearer 28fa7ecf174234dbe37e218dee6f56da5aaffb86",
+                "Content-Type": "application/json",
+            },
+            data: data,
+        };
+        try {
+            const response = await axios(config);
+            console.log(JSON.stringify(response.data));
+            getData();
+        } catch (error) {
+            alert(error);
+        }
+    };
+
+    const changeData = (event) => {
+        setContent(event.target.value);
+        setContent(event.target.value);
+        getData();
     };
 
     // Delete data
     const handleDelete = (item) => {
-        var config = {
+        let config = {
             method: "delete",
             url: `https://api.todoist.com/rest/v1/tasks/${item.id}`,
             headers: {
@@ -59,10 +83,21 @@ const Homes = () => {
             });
     };
 
+    const handleDetailPage = (item) => {
+        navigate(`edit/${item.id}`, {
+            state: {
+                id: item.id,
+                content: item.content,
+            },
+        });
+    };
+
     return (
         <div className="">
-            <Forms />
-            <Button className="mt-1 mb-2">Add Data</Button>
+            <Forms posting={changeData} ganti={changeData} />
+            <Button className="mt-1 mb-2" onClick={() => addData()}>
+                Add Data
+            </Button>
             <h1 className="mb-2 mt-5">TODO LIST</h1>
             {list.map((item, i) => {
                 return (
