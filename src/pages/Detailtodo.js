@@ -7,6 +7,8 @@ const Detailtodo = () => {
     const navigate = useNavigate();
     const [content, setContent] = useState(location.state.content);
 
+    console.log("halo");
+
     const handleSubmit = () => {
         const data = JSON.stringify({
             content: content,
@@ -20,6 +22,7 @@ const Detailtodo = () => {
             },
             data,
         };
+
         axios(config)
             .then((response) => {
                 navigate("/");

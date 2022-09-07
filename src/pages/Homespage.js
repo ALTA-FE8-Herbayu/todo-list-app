@@ -84,7 +84,7 @@ const Homes = () => {
     };
 
     const handleDetailPage = (item) => {
-        navigate(`/edit/${item.id}`, {
+        navigate(`/detail/${item.id}`, {
             state: {
                 id: item.id,
                 content: item.content,
