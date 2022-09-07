@@ -13,6 +13,7 @@ const Homes = () => {
         getData();
     }, []);
 
+    // Ambil data
     const getData = async () => {
         let config = {
             method: "get",
@@ -39,6 +40,7 @@ const Homes = () => {
         });
     };
 
+    // Delete data
     const handleDelete = (item) => {
         var config = {
             method: "delete",

@@ -22,7 +22,7 @@ const Detailtodo = ({ konten, angka, deletes }) => {
                                 <Button variant="success">Edit</Button>
                             </td>
                             <td style={{ width: "19rem" }}>
-                                <Button type="submit" variant="danger" href="/" onClick={deletes}>
+                                <Button variant="danger" onClick={deletes}>
                                     Delete
                                 </Button>
                             </td>
