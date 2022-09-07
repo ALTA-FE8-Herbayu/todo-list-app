@@ -32,6 +32,7 @@ const Homes = () => {
         }
     };
 
+    // Tambah data
     const addData = async () => {
         let axios = require("axios");
         var data = JSON.stringify({
@@ -60,7 +61,6 @@ const Homes = () => {
 
     const changeData = (event) => {
         setContent(event.target.value);
-        setContent(event.target.value);
         getData();
     };
 
@@ -84,7 +84,7 @@ const Homes = () => {
     };
 
     const handleDetailPage = (item) => {
-        navigate(`edit/${item.id}`, {
+        navigate(`/edit/${item.id}`, {
             state: {
                 id: item.id,
                 content: item.content,
@@ -94,7 +94,7 @@ const Homes = () => {
 
     return (
         <div className="">
-            <Forms posting={changeData} ganti={changeData} />
+            <Forms ganti={changeData} />
             <Button className="mt-1 mb-2" onClick={() => addData()}>
                 Add Data
             </Button>

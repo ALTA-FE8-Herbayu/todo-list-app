@@ -2,7 +2,7 @@ import React from "react";
 import { Button } from "react-bootstrap";
 import Table from "react-bootstrap/Table";
 
-const Detailtodo = ({ konten, angka, deletes }) => {
+const Detailtodo = ({ konten, angka, deletes, edit }) => {
     return (
         <div>
             <div style={{ display: "flex", justifyContent: "center" }}>
@@ -19,7 +19,9 @@ const Detailtodo = ({ konten, angka, deletes }) => {
                             <td>{angka}</td>
                             <td>{konten}</td>
                             <td style={{ width: "19rem" }}>
-                                <Button variant="success">Edit</Button>
+                                <Button variant="success" onClick={edit}>
+                                    Edit
+                                </Button>
                             </td>
                             <td style={{ width: "19rem" }}>
                                 <Button variant="danger" onClick={deletes}>
