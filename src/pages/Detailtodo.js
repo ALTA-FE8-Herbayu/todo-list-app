@@ -1,38 +1,43 @@
-import React from "react";
-import { Button } from "react-bootstrap";
-import Table from "react-bootstrap/Table";
+import React, { useState } from "react";
+import axios from "axios";
+import { useLocation, useNavigate } from "react-router-dom";
 
-const Detailtodo = ({ konten, angka, deletes, edit }) => {
+const Detailtodo = () => {
+    const location = useLocation();
+    const navigate = useNavigate();
+    const [content, setContent] = useState(location.state.content);
+
+    const handleSubmit = () => {
+        const data = JSON.stringify({
+            content: content,
+        });
+        const config = {
+            method: "post",
+            url: `https://api.todoist.com/rest/v1/tasks/${location.state.id}`,
+            headers: {
+                Authorization: "Bearer 28fa7ecf174234dbe37e218dee6f56da5aaffb86",
+                "Content-Type": "application/json",
+            },
+            data,
+        };
+        axios(config)
+            .then((response) => {
+                navigate("/");
+            })
+            .catch((error) => {
+                console.log(error, "error fren");
+            });
+    };
+
+    const handleChangeContent = (event) => {
+        setContent(event.target.value);
+    };
+
     return (
-        <div>
-            <div style={{ display: "flex", justifyContent: "center" }}>
-                <Table striped bordered hover variant="dark">
-                    <thead>
-                        <tr>
-                            <th style={{ width: "2rem" }}>No</th>
-                            <th style={{ width: "49rem" }}>Kegiatan</th>
-                            <th colSpan={2}>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>{angka}</td>
-                            <td>{konten}</td>
-                            <td style={{ width: "19rem" }}>
-                                <Button variant="success" onClick={edit}>
-                                    Edit
-                                </Button>
-                            </td>
-                            <td style={{ width: "19rem" }}>
-                                <Button variant="danger" onClick={deletes}>
-                                    Delete
-                                </Button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </Table>
-            </div>
-        </div>
+        <>
+            <input type="text" style={{ borderRadius: "30px", color: "black" }} onChange={handleChangeContent} placeholder="edit task" value={content} />
+            <button onClick={() => handleSubmit()}>posting</button>
+        </>
     );
 };
 

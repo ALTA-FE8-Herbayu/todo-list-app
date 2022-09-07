@@ -2,7 +2,7 @@ import "./App.css";
 import Homes from "./pages/Homespage";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbars from "./components/Navbars";
-import Edit from "./components/Edit";
+import Detailtodo from "./pages/Detailtodo";
 
 function App() {
     return (
@@ -11,7 +11,7 @@ function App() {
                 <Navbars />
                 <Routes>
                     <Route exact path="/" element={<Homes />} />
-                    <Route path="/edit:id" element={<Edit />} />
+                    <Route path="/detail/:id" element={<Detailtodo />} />
                 </Routes>
             </Router>
         </div>

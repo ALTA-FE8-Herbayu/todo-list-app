@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import { Forms } from "./Forms";
-import Detailtodo from "./Detailtodo";
+import Tables from "../components/Tables";
 
 const Homes = () => {
     const navigate = useNavigate();
@@ -35,7 +35,7 @@ const Homes = () => {
     // Tambah data
     const addData = async () => {
         let axios = require("axios");
-        var data = JSON.stringify({
+        let data = JSON.stringify({
             content: content,
             due_string: "tomorrow at 12:00",
             due_lang: "en",
@@ -100,9 +100,7 @@ const Homes = () => {
             </Button>
             <h1 className="mb-2 mt-5">TODO LIST</h1>
             {list.map((item, i) => {
-                return (
-                    <Detailtodo key={i} getData={getData} id={item.id} konten={item.content} angka={i + 1} edit={() => handleDetailPage(item)} deletes={() => handleDelete(item)} />
-                );
+                return <Tables key={i} getData={getData} id={item.id} konten={item.content} angka={i + 1} edit={() => handleDetailPage(item)} deletes={() => handleDelete(item)} />;
             })}
         </div>
     );
